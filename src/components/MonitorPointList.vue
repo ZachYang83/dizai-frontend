@@ -71,14 +71,16 @@ onMounted(async () => {
 }
 
 .monitor-item {
-  background: $bg-panel;
-  border-radius: $radius-sm;
+  background: rgba(0, 16, 40, 0.5);
   padding: 12px 14px;
   border: 1px solid $color-border-light;
-  transition: box-shadow 0.2s;
+  border-radius: 0;
+  transition: all 0.3s;
+  position: relative;
 
   &:hover {
-    box-shadow: $shadow-md;
+    border-color: $color-border;
+    box-shadow: 0 0 15px rgba(0, 140, 255, 0.08);
   }
 }
 
@@ -101,14 +103,15 @@ onMounted(async () => {
 .risk-tag {
   flex-shrink: 0;
   padding: 2px 8px;
-  border-radius: 10px;
   font-size: 11px;
   font-weight: 600;
+  border-radius: 0;
+  letter-spacing: 1px;
 
-  &.risk-red { background: #fef2f2; color: #dc2626; }
-  &.risk-orange { background: #fff7ed; color: #ea580c; }
-  &.risk-yellow { background: #fefce8; color: #ca8a04; }
-  &.risk-blue { background: #eff6ff; color: #2563eb; }
+  &.risk-red { background: rgba(255, 77, 106, 0.12); color: #ff4d6a; border: 1px solid rgba(255, 77, 106, 0.3); }
+  &.risk-orange { background: rgba(255, 159, 67, 0.12); color: #ff9f43; border: 1px solid rgba(255, 159, 67, 0.3); }
+  &.risk-yellow { background: rgba(255, 217, 61, 0.12); color: #ffd93d; border: 1px solid rgba(255, 217, 61, 0.3); }
+  &.risk-blue { background: rgba(0, 208, 255, 0.12); color: #00d0ff; border: 1px solid rgba(0, 208, 255, 0.3); }
 }
 
 .item-meta {
@@ -122,7 +125,7 @@ onMounted(async () => {
 .item-data {
   display: flex;
   gap: 16px;
-  margin-bottom: 8px;
+  margin-bottom: 10px;
 
   .data-item {
     display: flex;
@@ -147,31 +150,67 @@ onMounted(async () => {
         margin-left: 1px;
       }
 
-      &.status.alert { color: #ef4444; }
-      &.status.warning { color: #f97316; }
-      &.status.normal { color: #22c55e; }
+      &.status.alert { color: #ff4d6a; text-shadow: 0 0 8px rgba(255, 77, 106, 0.4); }
+      &.status.warning { color: #ff9f43; text-shadow: 0 0 8px rgba(255, 159, 67, 0.4); }
+      &.status.normal { color: #00ff88; text-shadow: 0 0 8px rgba(0, 255, 136, 0.4); }
     }
   }
 }
 
 .item-actions {
   display: flex;
-  gap: 6px;
+  gap: 8px;
 
   .btn {
     flex: 1;
-    padding: 4px 0;
-    border: none;
-    border-radius: 4px;
+    padding: 5px 0;
+    border-radius: 0;
     font-size: 11px;
     cursor: pointer;
-    transition: opacity 0.15s;
+    transition: all 0.3s;
+    font-weight: 500;
+    letter-spacing: 2px;
+    position: relative;
 
-    &:hover { opacity: 0.8; }
+    &:active {
+      transform: scale(0.96);
+    }
 
-    &.btn-view { background: rgba(37,99,235,0.08); color: #2563eb; }
-    &.btn-edit { background: rgba(6,182,212,0.08); color: #06b6d4; }
-    &.btn-delete { background: rgba(239,68,68,0.08); color: #ef4444; }
+    &.btn-view {
+      background: linear-gradient(180deg, rgba(0, 140, 255, 0.2) 0%, rgba(0, 140, 255, 0.05) 100%);
+      border: 1px solid rgba(0, 180, 255, 0.35);
+      color: #00d0ff;
+
+      &:hover {
+        background: linear-gradient(180deg, rgba(0, 140, 255, 0.35) 0%, rgba(0, 140, 255, 0.1) 100%);
+        box-shadow: 0 0 14px rgba(0, 140, 255, 0.25), inset 0 0 8px rgba(0, 140, 255, 0.08);
+        text-shadow: 0 0 6px rgba(0, 208, 255, 0.5);
+      }
+    }
+
+    &.btn-edit {
+      background: linear-gradient(180deg, rgba(0, 100, 200, 0.2) 0%, rgba(0, 100, 200, 0.05) 100%);
+      border: 1px solid rgba(0, 120, 220, 0.35);
+      color: #4db8ff;
+
+      &:hover {
+        background: linear-gradient(180deg, rgba(0, 100, 200, 0.35) 0%, rgba(0, 100, 200, 0.1) 100%);
+        box-shadow: 0 0 14px rgba(0, 100, 200, 0.25), inset 0 0 8px rgba(0, 100, 200, 0.08);
+        text-shadow: 0 0 6px rgba(77, 184, 255, 0.5);
+      }
+    }
+
+    &.btn-delete {
+      background: linear-gradient(180deg, rgba(255, 60, 80, 0.2) 0%, rgba(255, 60, 80, 0.05) 100%);
+      border: 1px solid rgba(255, 77, 106, 0.35);
+      color: #ff6b80;
+
+      &:hover {
+        background: linear-gradient(180deg, rgba(255, 60, 80, 0.35) 0%, rgba(255, 60, 80, 0.1) 100%);
+        box-shadow: 0 0 14px rgba(255, 60, 80, 0.25), inset 0 0 8px rgba(255, 60, 80, 0.08);
+        text-shadow: 0 0 6px rgba(255, 107, 128, 0.5);
+      }
+    }
   }
 }
 </style>

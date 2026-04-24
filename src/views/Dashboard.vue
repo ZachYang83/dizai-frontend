@@ -21,8 +21,9 @@
 
     <div class="dashboard-right">
       <div class="right-header">
-        <span class="dot-indicator"></span>
-        <span>监测点位列表</span>
+        <span class="header-line"></span>
+        <span class="right-title">监测点位列表</span>
+        <span class="header-dash"></span>
       </div>
       <MonitorPointList
         @view="handleView"
@@ -57,6 +58,7 @@ function handleDelete(point) {
 
 <style lang="scss" scoped>
 @use '@/assets/styles/variables.scss' as *;
+@use '@/assets/styles/mixins.scss' as *;
 
 .dashboard {
   display: flex;
@@ -73,14 +75,7 @@ function handleDelete(point) {
   display: flex;
   flex-direction: column;
   overflow-y: auto;
-
-  &::-webkit-scrollbar {
-    width: 3px;
-  }
-  &::-webkit-scrollbar-thumb {
-    background: $color-border;
-    border-radius: 2px;
-  }
+  @include scrollbar-thin;
 }
 
 .dashboard-center {
@@ -94,36 +89,93 @@ function handleDelete(point) {
   max-width: 340px;
   display: flex;
   flex-direction: column;
+  background: $bg-panel;
+  border: 1px solid $color-border-light;
+  backdrop-filter: blur(8px);
+  box-shadow: inset 0 0 30px rgba(0, 100, 200, 0.04), 0 0 1px rgba(0, 180, 255, 0.1);
+  position: relative;
 
-  .right-header {
-    display: flex;
-    align-items: center;
-    gap: 8px;
-    padding: 12px 16px;
-    background: $bg-panel;
-    border-radius: $radius-md $radius-md 0 0;
-    border: 1px solid $color-border-light;
-    border-bottom: none;
+  // 角标
+  &::before {
+    content: '';
+    position: absolute;
+    top: 0; left: 0;
+    width: 14px; height: 14px;
+    border-top: 2px solid $color-primary;
+    border-left: 2px solid $color-primary;
+    box-shadow: -2px -2px 6px rgba(0, 180, 255, 0.2);
+    pointer-events: none;
+    z-index: 2;
+  }
+
+  &::after {
+    content: '';
+    position: absolute;
+    bottom: 0; right: 0;
+    width: 14px; height: 14px;
+    border-bottom: 2px solid $color-primary;
+    border-right: 2px solid $color-primary;
+    box-shadow: 2px 2px 6px rgba(0, 180, 255, 0.2);
+    pointer-events: none;
+    z-index: 2;
+  }
+
+  .right-corner-tr,
+  .right-corner-bl {
+    position: absolute;
+    width: 14px;
+    height: 14px;
+    pointer-events: none;
+    z-index: 2;
+  }
+}
+
+.right-header {
+  display: flex;
+  align-items: center;
+  gap: 8px;
+  padding: 10px 16px 8px;
+  position: relative;
+
+  &::after {
+    content: '';
+    position: absolute;
+    bottom: 0;
+    left: 0;
+    right: 0;
+    height: 1px;
+    background: linear-gradient(90deg, $color-primary, rgba(0, 140, 255, 0.3) 50%, transparent);
+    opacity: 0.6;
+  }
+
+  .header-line {
+    width: 3px;
+    height: 14px;
+    border-radius: 1px;
+    background: $color-primary;
+    box-shadow: 0 0 8px $color-glow;
+    flex-shrink: 0;
+  }
+
+  .right-title {
     font-size: 14px;
     font-weight: 600;
-    color: $color-text-primary;
-
-    .dot-indicator {
-      width: 4px;
-      height: 14px;
-      border-radius: 2px;
-      background: $color-primary;
-    }
+    color: $color-primary;
+    letter-spacing: 1px;
+    flex-shrink: 0;
   }
 
-  & > :deep(.monitor-list) {
+  .header-dash {
     flex: 1;
-    overflow-y: auto;
-    background: $bg-panel;
-    border-radius: 0 0 $radius-md $radius-md;
-    border: 1px solid $color-border-light;
-    border-top: none;
-    padding: 8px 12px;
+    height: 1px;
+    background: linear-gradient(90deg, rgba(0, 180, 255, 0.3), transparent);
   }
+}
+
+& > :deep(.monitor-list) {
+  flex: 1;
+  overflow-y: auto;
+  padding: 8px 12px;
+  @include scrollbar-thin;
 }
 </style>

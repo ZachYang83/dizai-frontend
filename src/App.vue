@@ -12,5 +12,7 @@ import Header from '@/components/Header.vue'
 <style lang="scss">
 #app-root {
   padding-top: 64px;
+  position: relative;
+  z-index: 1;
 }
 </style>

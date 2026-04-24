@@ -27,15 +27,15 @@ function initChart(data) {
       type: 'value',
       axisLine: { show: false },
       axisTick: { show: false },
-      splitLine: { lineStyle: { color: '#f1f5f9', type: 'dashed' } },
-      axisLabel: { fontSize: 10, color: '#94a3b8' }
+      splitLine: { lineStyle: { color: 'rgba(0, 180, 255, 0.06)', type: 'dashed' } },
+      axisLabel: { fontSize: 10, color: '#3d6d8e' }
     },
     yAxis: {
       type: 'category',
       data: data.map(d => d.name),
-      axisLine: { lineStyle: { color: '#e2e8f0' } },
+      axisLine: { lineStyle: { color: 'rgba(0, 180, 255, 0.12)' } },
       axisTick: { show: false },
-      axisLabel: { fontSize: 11, color: '#64748b' }
+      axisLabel: { fontSize: 11, color: '#6fb4e0' }
     },
     series: [{
       type: 'bar',
@@ -43,20 +43,22 @@ function initChart(data) {
         value: d.value,
         itemStyle: {
           color: new echarts.graphic.LinearGradient(0, 0, 1, 0, [
-            { offset: 0, color: d.color + '99' },
+            { offset: 0, color: 'rgba(0, 80, 160, 0.3)' },
             { offset: 1, color: d.color }
           ]),
-          borderRadius: [0, 4, 4, 0]
+          borderRadius: [0, 2, 2, 0],
+          shadowColor: d.color,
+          shadowBlur: 4
         }
       })),
-      barWidth: 16
+      barWidth: 14
     }],
     tooltip: {
       trigger: 'axis',
       axisPointer: { type: 'shadow' },
-      backgroundColor: '#fff',
-      borderColor: '#e2e8f0',
-      textStyle: { color: '#1e293b', fontSize: 12 }
+      backgroundColor: 'rgba(2, 12, 36, 0.92)',
+      borderColor: 'rgba(0, 180, 255, 0.25)',
+      textStyle: { color: '#dce9f5', fontSize: 12 }
     }
   })
 }

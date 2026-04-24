@@ -1,32 +1,33 @@
-// 浅色科技风主题变量
-$bg-primary: #f0f5fa;
-$bg-panel: #ffffff;
-$bg-header: #ffffff;
+// 蓝色科技风大屏主题变量
+$bg-primary: #040d21;
+$bg-panel: rgba(4, 21, 56, 0.85);
+$bg-header: rgba(2, 12, 36, 0.95);
 
-$color-primary: #2563eb;
-$color-primary-light: #3b82f6;
-$color-accent: #06b6d4;
-$color-accent-light: #22d3ee;
+$color-primary: #00d0ff;
+$color-primary-light: #36e0ff;
+$color-accent: #0088ff;
+$color-accent-light: #3cf;
 
-$color-text-primary: #1e293b;
-$color-text-secondary: #64748b;
-$color-text-muted: #94a3b8;
+$color-text-primary: #dce9f5;
+$color-text-secondary: #6fb4e0;
+$color-text-muted: #3d6d8e;
 
-$color-border: #e2e8f0;
-$color-border-light: #f1f5f9;
+$color-border: rgba(0, 180, 255, 0.25);
+$color-border-light: rgba(0, 180, 255, 0.12);
+$color-glow: rgba(0, 180, 255, 0.5);
 
-$shadow-sm: 0 1px 2px rgba(0, 0, 0, 0.05);
-$shadow-md: 0 4px 6px -1px rgba(0, 0, 0, 0.07), 0 2px 4px -2px rgba(0, 0, 0, 0.05);
-$shadow-lg: 0 10px 15px -3px rgba(0, 0, 0, 0.08), 0 4px 6px -4px rgba(0, 0, 0, 0.04);
+$shadow-sm: 0 0 8px rgba(0, 140, 255, 0.06);
+$shadow-md: 0 0 20px rgba(0, 140, 255, 0.1);
+$shadow-lg: 0 0 40px rgba(0, 140, 255, 0.12);
 
-$radius-sm: 6px;
-$radius-md: 10px;
-$radius-lg: 14px;
+$radius-sm: 2px;
+$radius-md: 4px;
+$radius-lg: 6px;
 
-$color-risk-red: #ef4444;
-$color-risk-orange: #f97316;
-$color-risk-yellow: #eab308;
-$color-risk-blue: #3b82f6;
+$color-risk-red: #ff4d6a;
+$color-risk-orange: #ff9f43;
+$color-risk-yellow: #ffd93d;
+$color-risk-blue: #00d0ff;
 
 $font-family: -apple-system, BlinkMacSystemFont, 'PingFang SC', 'Microsoft YaHei', 'Helvetica Neue', sans-serif;
 

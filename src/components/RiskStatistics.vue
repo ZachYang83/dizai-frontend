@@ -4,9 +4,9 @@
       v-for="item in cards"
       :key="item.key"
       class="risk-card"
-      :style="{ borderLeftColor: item.color }"
+      :style="{ '--card-color': item.color }"
     >
-      <div class="card-value" :style="{ color: item.color }">{{ item.count }}</div>
+      <div class="card-value">{{ item.count }}</div>
       <div class="card-label">{{ item.label }}</div>
       <div class="card-level">{{ item.level }}</div>
     </div>
@@ -20,10 +20,10 @@ import { getStatistics } from '@/api/dashboard.js'
 const cards = ref([])
 
 const colorMap = {
-  red: '#ef4444',
-  orange: '#f97316',
-  yellow: '#eab308',
-  blue: '#3b82f6'
+  red: '#ff4d6a',
+  orange: '#ff9f43',
+  yellow: '#ffd93d',
+  blue: '#00d0ff'
 }
 
 onMounted(async () => {
@@ -48,20 +48,38 @@ onMounted(async () => {
 }
 
 .risk-card {
-  background: $bg-panel;
-  border-radius: $radius-sm;
+  position: relative;
+  background: rgba(0, 14, 36, 0.5);
   padding: 12px 14px;
-  border-left: 3px solid;
-  transition: transform 0.2s;
+  border: 1px solid $color-border-light;
+  border-left: 3px solid var(--card-color);
+  transition: all 0.3s;
+  overflow: hidden;
+
+  &::before {
+    content: '';
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    background: radial-gradient(ellipse at top left, var(--card-color) 0%, transparent 60%);
+    opacity: 0.04;
+    pointer-events: none;
+  }
 
   &:hover {
-    transform: translateY(-1px);
+    box-shadow: 0 0 16px rgba(0, 140, 255, 0.08);
+    border-color: $color-border;
+    border-left-color: var(--card-color);
   }
 
   .card-value {
     font-size: 26px;
     font-weight: 700;
     line-height: 1.2;
+    color: var(--card-color);
+    text-shadow: 0 0 10px var(--card-color);
   }
 
   .card-label {

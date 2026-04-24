@@ -1,5 +1,9 @@
 <template>
   <div class="center-map">
+    <span class="corner corner-tl"></span>
+    <span class="corner corner-tr"></span>
+    <span class="corner corner-bl"></span>
+    <span class="corner corner-br"></span>
     <div class="map-info-bar">
       <span class="status-dot"></span>
       <span>实时监测中</span>
@@ -12,7 +16,7 @@
     <div class="map-legend">
       <div class="legend-title">风险等级</div>
       <div class="legend-item" v-for="item in legend" :key="item.label">
-        <span class="legend-dot" :style="{ background: item.color }"></span>
+        <span class="legend-dot" :style="{ background: item.color, boxShadow: '0 0 4px ' + item.color }"></span>
         <span>{{ item.label }}</span>
       </div>
     </div>
@@ -30,17 +34,17 @@ const updateTime = ref(new Date().toLocaleDateString('zh-CN'))
 let map = null
 
 const legend = [
-  { label: '高风险 (I级)', color: '#ef4444' },
-  { label: '中风险 (II级)', color: '#f97316' },
-  { label: '低风险 (III级)', color: '#eab308' },
-  { label: '一般 (IV级)', color: '#3b82f6' }
+  { label: '高风险 (I级)', color: '#ff4d6a' },
+  { label: '中风险 (II级)', color: '#ff9f43' },
+  { label: '低风险 (III级)', color: '#ffd93d' },
+  { label: '一般 (IV级)', color: '#00d0ff' }
 ]
 
 const riskColors = {
-  red: '#ef4444',
-  orange: '#f97316',
-  yellow: '#eab308',
-  blue: '#3b82f6'
+  red: '#ff4d6a',
+  orange: '#ff9f43',
+  yellow: '#ffd93d',
+  blue: '#00d0ff'
 }
 
 onMounted(async () => {
@@ -64,29 +68,29 @@ async function initMap(points) {
     map = new AMap.Map(mapContainer.value, {
       zoom: 10,
       center: [113.55, 23.45],
-      mapStyle: 'amap://styles/whitesmoke',
+      mapStyle: 'amap://styles/dark',
       viewMode: '2D'
     })
 
     points.forEach(p => {
-      const color = riskColors[p.riskLevel] || '#3b82f6'
+      const color = riskColors[p.riskLevel] || '#00d0ff'
       const marker = new AMap.CircleMarker({
         center: [p.lng, p.lat],
         radius: 8,
         fillColor: color,
         fillOpacity: 0.8,
-        strokeColor: '#fff',
+        strokeColor: color,
         strokeWeight: 2,
         strokeOpacity: 0.9
       })
       marker.setMap(map)
 
       const info = new AMap.InfoWindow({
-        content: `<div style="padding:8px;font-size:13px;">
-          <strong>${p.name}</strong><br/>
-          编号: ${p.code}<br/>
-          风险等级: ${p.riskLabel}<br/>
-          雨量: ${p.rainfall}mm | 位移: ${p.displacement}cm
+        content: `<div style="padding:10px;font-size:13px;color:#dce9f5;background:rgba(4,21,56,0.95);border:1px solid rgba(0,180,255,0.25);">
+          <strong style="color:#00d0ff;">${p.name}</strong><br/>
+          <span style="color:#6fb4e0;">编号: ${p.code}</span><br/>
+          <span style="color:#6fb4e0;">风险等级: ${p.riskLabel}</span><br/>
+          <span style="color:#6fb4e0;">雨量: ${p.rainfall}mm | 位移: ${p.displacement}cm</span>
         </div>`,
         offset: new AMap.Pixel(0, -12)
       })
@@ -104,12 +108,12 @@ async function initMap(points) {
         width:100%;height:100%;
         display:flex;flex-direction:column;
         align-items:center;justify-content:center;
-        background:linear-gradient(135deg,#e8f0fe 0%,#f0f5fa 100%);
-        color:#64748b;font-size:15px;
+        background:radial-gradient(ellipse at center, rgba(0,60,120,0.25) 0%, rgba(4,13,33,0.9) 70%);
+        color:#6fb4e0;font-size:15px;
       ">
         <div style="font-size:48px;margin-bottom:12px;">🗺️</div>
-        <div>地图区域（需配置高德地图 Key）</div>
-        <div style="font-size:12px;margin-top:8px;color:#94a3b8;">
+        <div style="color:#00d0ff;font-size:16px;">地图区域（需配置高德地图 Key）</div>
+        <div style="font-size:12px;margin-top:8px;color:#3d6d8e;">
           共 ${pointCount.value} 个监测点位
         </div>
       </div>
@@ -125,11 +129,48 @@ async function initMap(points) {
   position: relative;
   width: 100%;
   height: 100%;
-  border-radius: $radius-md;
   overflow: hidden;
   background: $bg-panel;
-  box-shadow: $shadow-sm;
   border: 1px solid $color-border-light;
+  box-shadow: inset 0 0 30px rgba(0, 100, 200, 0.04), 0 0 1px rgba(0, 180, 255, 0.1);
+  backdrop-filter: blur(8px);
+}
+
+// ─── 四角 L 形角标 ───
+.corner {
+  position: absolute;
+  width: 18px;
+  height: 18px;
+  z-index: 20;
+  pointer-events: none;
+
+  &::before,
+  &::after {
+    content: '';
+    position: absolute;
+    background: $color-primary;
+  }
+}
+
+.corner-tl {
+  top: 0; left: 0;
+  &::before { width: 18px; height: 2px; top: 0; left: 0; box-shadow: 0 0 6px $color-glow; }
+  &::after  { width: 2px; height: 18px; top: 0; left: 0; box-shadow: 0 0 6px $color-glow; }
+}
+.corner-tr {
+  top: 0; right: 0;
+  &::before { width: 18px; height: 2px; top: 0; right: 0; box-shadow: 0 0 6px $color-glow; }
+  &::after  { width: 2px; height: 18px; top: 0; right: 0; box-shadow: 0 0 6px $color-glow; }
+}
+.corner-bl {
+  bottom: 0; left: 0;
+  &::before { width: 18px; height: 2px; bottom: 0; left: 0; box-shadow: 0 0 6px $color-glow; }
+  &::after  { width: 2px; height: 18px; bottom: 0; left: 0; box-shadow: 0 0 6px $color-glow; }
+}
+.corner-br {
+  bottom: 0; right: 0;
+  &::before { width: 18px; height: 2px; bottom: 0; right: 0; box-shadow: 0 0 6px $color-glow; }
+  &::after  { width: 2px; height: 18px; bottom: 0; right: 0; box-shadow: 0 0 6px $color-glow; }
 }
 
 .map-info-bar {
@@ -140,20 +181,20 @@ async function initMap(points) {
   z-index: 10;
   display: flex;
   align-items: center;
-  gap: 6px;
-  padding: 8px 18px;
-  background: rgba(255, 255, 255, 0.92);
-  border-radius: 20px;
+  gap: 8px;
+  padding: 7px 20px;
+  background: rgba(2, 12, 36, 0.8);
+  border: 1px solid $color-border;
   font-size: 13px;
   color: $color-text-secondary;
-  box-shadow: $shadow-md;
-  backdrop-filter: blur(8px);
+  backdrop-filter: blur(10px);
 
   .status-dot {
-    width: 8px;
-    height: 8px;
+    width: 7px;
+    height: 7px;
     border-radius: 50%;
-    background: #22c55e;
+    background: #00ff88;
+    box-shadow: 0 0 8px #00ff88;
     animation: pulse 2s infinite;
   }
 
@@ -174,16 +215,16 @@ async function initMap(points) {
   left: 16px;
   z-index: 10;
   padding: 10px 14px;
-  background: rgba(255, 255, 255, 0.92);
-  border-radius: $radius-sm;
-  box-shadow: $shadow-sm;
-  backdrop-filter: blur(8px);
+  background: rgba(2, 12, 36, 0.8);
+  border: 1px solid $color-border;
+  backdrop-filter: blur(10px);
 
   .legend-title {
     font-size: 12px;
     font-weight: 600;
-    color: $color-text-primary;
+    color: $color-primary;
     margin-bottom: 6px;
+    letter-spacing: 1px;
   }
 
   .legend-item {
@@ -203,7 +244,7 @@ async function initMap(points) {
 }
 
 @keyframes pulse {
-  0%, 100% { opacity: 1; }
-  50% { opacity: 0.4; }
+  0%, 100% { opacity: 1; box-shadow: 0 0 8px #00ff88; }
+  50% { opacity: 0.4; box-shadow: 0 0 3px #00ff88; }
 }
 </style>

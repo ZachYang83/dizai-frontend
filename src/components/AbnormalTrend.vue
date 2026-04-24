@@ -34,39 +34,40 @@ function initChart(data) {
     xAxis: {
       type: 'category',
       data: data.hours,
-      axisLine: { lineStyle: { color: '#e2e8f0' } },
-      axisLabel: {
-        fontSize: 10,
-        color: '#94a3b8',
-        interval: 5
-      },
+      axisLine: { lineStyle: { color: 'rgba(0, 180, 255, 0.12)' } },
+      axisLabel: { fontSize: 10, color: '#3d6d8e', interval: 5 },
       axisTick: { show: false }
     },
     yAxis: {
       type: 'value',
       axisLine: { show: false },
       axisTick: { show: false },
-      splitLine: { lineStyle: { color: '#f1f5f9', type: 'dashed' } },
-      axisLabel: { fontSize: 10, color: '#94a3b8' }
+      splitLine: { lineStyle: { color: 'rgba(0, 180, 255, 0.06)', type: 'dashed' } },
+      axisLabel: { fontSize: 10, color: '#3d6d8e' }
     },
     series: [{
       type: 'line',
       data: data.values,
       smooth: true,
       symbol: 'none',
-      lineStyle: { color: '#2563eb', width: 2 },
+      lineStyle: {
+        color: '#00d0ff',
+        width: 2,
+        shadowColor: 'rgba(0, 208, 255, 0.5)',
+        shadowBlur: 10
+      },
       areaStyle: {
         color: new echarts.graphic.LinearGradient(0, 0, 0, 1, [
-          { offset: 0, color: 'rgba(37,99,235,0.2)' },
-          { offset: 1, color: 'rgba(37,99,235,0.02)' }
+          { offset: 0, color: 'rgba(0, 208, 255, 0.2)' },
+          { offset: 1, color: 'rgba(0, 208, 255, 0.01)' }
         ])
       }
     }],
     tooltip: {
       trigger: 'axis',
-      backgroundColor: '#fff',
-      borderColor: '#e2e8f0',
-      textStyle: { color: '#1e293b', fontSize: 12 }
+      backgroundColor: 'rgba(2, 12, 36, 0.92)',
+      borderColor: 'rgba(0, 180, 255, 0.25)',
+      textStyle: { color: '#dce9f5', fontSize: 12 }
     }
   })
 }
@@ -81,13 +82,14 @@ function initChart(data) {
 
   .trend-label {
     font-size: 13px;
-    color: #64748b;
+    color: #6fb4e0;
   }
 
   .trend-value {
     font-size: 20px;
     font-weight: 700;
-    color: #2563eb;
+    color: #00d0ff;
+    text-shadow: 0 0 10px rgba(0, 208, 255, 0.4);
   }
 }
 

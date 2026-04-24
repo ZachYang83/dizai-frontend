@@ -7,7 +7,7 @@
     >
       <span class="rank" :class="'rank-' + item.rank">{{ item.rank }}</span>
       <span class="name">{{ item.name }}</span>
-      <span class="dot" :style="{ background: colorMap[item.risk] }"></span>
+      <span class="dot" :style="{ background: colorMap[item.risk], boxShadow: '0 0 5px ' + colorMap[item.risk] }"></span>
       <span v-if="item.alert" class="alert-badge">!</span>
     </div>
   </div>
@@ -19,10 +19,10 @@ import { getTopRiskPoints } from '@/api/dashboard.js'
 
 const list = ref([])
 const colorMap = {
-  red: '#ef4444',
-  orange: '#f97316',
-  yellow: '#eab308',
-  blue: '#3b82f6'
+  red: '#ff4d6a',
+  orange: '#ff9f43',
+  yellow: '#ffd93d',
+  blue: '#00d0ff'
 }
 
 onMounted(async () => {
@@ -44,30 +44,43 @@ onMounted(async () => {
   align-items: center;
   gap: 8px;
   padding: 6px 8px;
-  border-radius: $radius-sm;
-  transition: background 0.15s;
+  transition: all 0.2s;
   cursor: pointer;
 
   &:hover {
-    background: rgba(37, 99, 235, 0.04);
+    background: rgba(0, 180, 255, 0.05);
   }
 
   .rank {
     width: 20px;
     height: 20px;
-    border-radius: 4px;
     display: flex;
     align-items: center;
     justify-content: center;
     font-size: 11px;
     font-weight: 700;
-    color: #fff;
     flex-shrink: 0;
 
-    &.rank-1 { background: #ef4444; }
-    &.rank-2 { background: #f97316; }
-    &.rank-3 { background: #eab308; }
-    &.rank-4, &.rank-5 { background: #94a3b8; }
+    &.rank-1 {
+      background: linear-gradient(135deg, #ff4d6a, #ff2d4f);
+      color: #fff;
+      box-shadow: 0 0 8px rgba(255, 77, 106, 0.4);
+    }
+    &.rank-2 {
+      background: linear-gradient(135deg, #ff9f43, #ff7b00);
+      color: #fff;
+      box-shadow: 0 0 8px rgba(255, 159, 67, 0.4);
+    }
+    &.rank-3 {
+      background: linear-gradient(135deg, #ffd93d, #ffb300);
+      color: #fff;
+      box-shadow: 0 0 8px rgba(255, 217, 61, 0.3);
+    }
+    &.rank-4, &.rank-5 {
+      background: rgba(0, 180, 255, 0.15);
+      border: 1px solid rgba(0, 180, 255, 0.3);
+      color: $color-primary;
+    }
   }
 
   .name {
@@ -89,9 +102,10 @@ onMounted(async () => {
   .alert-badge {
     width: 16px;
     height: 16px;
-    border-radius: 3px;
-    background: #fef3c7;
-    color: #d97706;
+    border-radius: 0;
+    background: rgba(255, 159, 67, 0.12);
+    border: 1px solid rgba(255, 159, 67, 0.4);
+    color: #ff9f43;
     font-size: 10px;
     font-weight: 700;
     display: flex;
