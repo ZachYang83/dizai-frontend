@@ -1,0 +1,107 @@
+// 监测点位数据
+export const monitorPoints = [
+  {
+    id: 1,
+    name: '白云区大源路雅苑二北巷北侧山体',
+    code: 'GZ009',
+    lng: 113.273,
+    lat: 23.291,
+    riskLevel: 'red',
+    riskLabel: '高',
+    rainfall: 50,
+    displacement: 2.0,
+    status: 'alert',
+    region: '白云区'
+  },
+  {
+    id: 2,
+    name: '吕田镇东联村兴龙社滑坡隐患点',
+    code: 'GZ012',
+    lng: 113.823,
+    lat: 23.543,
+    riskLevel: 'red',
+    riskLabel: '高',
+    rainfall: 65,
+    displacement: 3.2,
+    status: 'alert',
+    region: '从化区'
+  },
+  {
+    id: 3,
+    name: '良口镇流溪河水库北侧山体',
+    code: 'GZ015',
+    lng: 113.587,
+    lat: 23.612,
+    riskLevel: 'red',
+    riskLabel: '高',
+    rainfall: 72,
+    displacement: 4.1,
+    status: 'alert',
+    region: '从化区'
+  },
+  {
+    id: 4,
+    name: '温泉镇新田村山体崩塌隐患',
+    code: 'GZ018',
+    lng: 113.512,
+    lat: 23.556,
+    riskLevel: 'orange',
+    riskLabel: '中',
+    rainfall: 38,
+    displacement: 1.5,
+    status: 'warning',
+    region: '从化区'
+  },
+  {
+    id: 5,
+    name: '鳌头镇黄茅村泥石流隐患点',
+    code: 'GZ021',
+    lng: 113.478,
+    lat: 23.489,
+    riskLevel: 'orange',
+    riskLabel: '中',
+    rainfall: 42,
+    displacement: 1.8,
+    status: 'warning',
+    region: '从化区'
+  },
+  {
+    id: 6,
+    name: '太平镇秋枫村地面沉降监测区',
+    code: 'GZ024',
+    lng: 113.623,
+    lat: 23.378,
+    riskLevel: 'yellow',
+    riskLabel: '低',
+    rainfall: 20,
+    displacement: 0.5,
+    status: 'normal',
+    region: '从化区'
+  },
+  {
+    id: 7,
+    name: '花都区梯面镇联丰村滑坡点',
+    code: 'GZ027',
+    lng: 113.189,
+    lat: 23.423,
+    riskLevel: 'yellow',
+    riskLabel: '低',
+    rainfall: 15,
+    displacement: 0.3,
+    status: 'normal',
+    region: '花都区'
+  },
+  {
+    id: 8,
+    name: '增城区派潭镇高滩村崩塌隐患',
+    code: 'GZ030',
+    lng: 113.812,
+    lat: 23.487,
+    riskLevel: 'blue',
+    riskLabel: '一般',
+    rainfall: 8,
+    displacement: 0.1,
+    status: 'normal',
+    region: '增城区'
+  }
+]
